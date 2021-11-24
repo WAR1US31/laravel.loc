@@ -10,8 +10,12 @@
 <body>
 <form action="{{ route('contact') }}" method="post">
     @csrf
-    <input type="text" name="name">
-    <input type="email" name="email">
+    <label>
+        <input type="text" name="name">
+    </label>
+    <label>
+        <input type="email" name="email">
+    </label>
     <button type="submit">submit</button>
 </form>
 </body>
