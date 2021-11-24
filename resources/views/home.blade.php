@@ -12,5 +12,10 @@
 
     {{ $res }} <br>
     {{ $name }}
+    <br>
+
+{{ route('post', ['id' => 3]) }}
+    <br>
+{{ route('admin.post', ['id' => 3]) }}
 </body>
 </html>
