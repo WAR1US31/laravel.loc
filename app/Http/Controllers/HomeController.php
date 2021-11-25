@@ -8,22 +8,28 @@ class HomeController extends Controller
 {
     public function index()
     {
-//        $query = DB::insert("INSERT INTO posts (title, content) VALUES (?, ?)", ['Статья 5', 'Контент статьи 5']);
-//        var_dump($query);
-//        DB::update("UPDATE posts SET created_at = ?, updated_at = ? WHERE created_at IS NULL OR updated_at IS NULL", [NOW(), NOW()]);
-//        DB::delete("DELETE FROM posts WHERE id = :id", ['id' => 4]);
-        DB::beginTransaction();
-        try {
-            DB::update("UPDATE posts SET created_at = ? WHERE created_at IS NULL", [NOW()]);
-            DB::update("UPDATE posts SET updated_at = ? WHERE updated_at IS NULL", [NOW()]);
-            DB::commit();
-        }catch ( \Exception $e) {
-            DB::rollBack();
-            echo $e->getMessage();
-        }
-
-        $posts = DB::select("SELECT * FROM posts WHERE id > :id", ['id' => 0]);
-        return $posts;
+//        $data = DB::table('country')->get();
+//        $data = DB::table('country')->limit(5)->get();
+//        $data = DB::table('country')->select('Code', 'Name')->limit(5)->get();
+//        $data = DB::table('country')->select('Code', 'Name')->orderBy('Code', 'desc')->first();
+//        $data = DB::table('city')->select('ID', 'Name')->find(2);
+        /*$data = DB::table('city')->select('ID', 'Name')->where([
+            ['id', '>', 1],
+            ['id', '<', 5]
+        ])->get();*/
+//        $data = DB::table('city')->where('id', '<', 5)->value('Name');
+//        $data = DB::table('country')->limit(10)->pluck('Name', 'Code');
+//        $data = DB::table('country')->count();
+//        $data = DB::table('country')->max('population');
+//        $data = DB::table('country')->avg('population');
+//        $data = DB::table('city')->select('CountryCode')->distinct()->get();
+        $data = DB::table('city')
+            ->select('city.ID', 'city.Name as city_name', 'country.Code', 'country.Name as country_name')
+            ->limit(10)
+            ->join('country', 'city.CountryCode', '=', 'country.Code')
+            ->orderBy('city.ID')
+            ->get();
+        dd($data);
 
         return view('home');
     }
