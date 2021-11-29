@@ -41,9 +41,21 @@ class HomeController extends Controller
 
 //        $post = Post::query()->find(3);
 //        c
-//        $cat = Category::query()->find(4);
-        $post = Post::query()->find(1);
-        dump($post->title, $post->category->title);
+        /*$posts = Category::query()->find(2)->posts()->select('title')->where('id', '>', '2')->get();
+//        $post = Post::query()->find(1);
+        dump($posts);*/
+
+       /* $posts = Post::query()->with('category')->where('id', '>', 1)->get();
+        foreach ($posts as $post) {
+            dump($post['title'], $post->category->title);
+        }*/
+
+        $post = Post::query()->find(7);
+        dump($post->title);
+
+        foreach ($post->tags as $tag) {
+            dump($tag->title);
+        }
 
         return view('home');
     }
