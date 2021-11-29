@@ -7,6 +7,9 @@ use App\Http\Controllers\Test\TestController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/create', [HomeController::class, 'create'])->name('posts.create');
+Route::post('/', [HomeController::class, 'store'])->name('posts.store');
+
 Route::get('/page/about', [PageController::class, 'show'])->name('page.about');
 
 

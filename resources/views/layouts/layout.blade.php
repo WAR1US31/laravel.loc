@@ -64,6 +64,8 @@
                 </svg>
                 <strong>Album</strong>
             </a>
+            <a href="{{ route('posts.create') }}" class="btn btn-success">Create post</a>
+
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHeader"
                     aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -74,6 +76,9 @@
 
 <main>
 
+   <div class="container mt-3">
+       @include('layouts.errors')
+   </div>
     @yield('content')
 
 </main>
