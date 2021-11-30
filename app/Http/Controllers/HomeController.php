@@ -7,15 +7,33 @@ use App\Models\City;
 use App\Models\Country;
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
 class HomeController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+//        Cookie::queue('test', 'Test cookie', 5);
+//        Cookie::queue(Cookie::forget('test'));
+//        dump(Cookie::get('test'));
+//        dump($request->cookie('test'));
+//        Cache::put('key', 'Value', 60);
+//        dump(Cache::pull('key'));
+//        dump(Cache::get('key'));
+
+//        Cache::put('key', 'Value', 300);
+//        Cache::flush();
+        if(Cache::has('posts')){
+            $posts = Cache::get('posts');
+        } else {
+            $posts = Post::query()->orderBy('id', 'desc')->get();
+            Cache::put('posts', $posts);
+        }
         $title = 'Home Page';
-        $posts = Post::query()->orderBy('id', 'desc')->get();
+
 
         return view('home', compact('title', 'posts'));
     }
@@ -55,6 +73,7 @@ class HomeController extends Controller
 //        $validator = Validator::make($request->all(), $rules, $messages)->validate();
 
         Post::query()->create($request->all());
+        $request->session()->flash('success', 'Данные сохранены!');
         return redirect()->route('home');
     }
 }
