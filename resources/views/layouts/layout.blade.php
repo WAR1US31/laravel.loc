@@ -63,7 +63,30 @@
                 </svg>
                 <strong>Album</strong>
             </a>
-            <a href="{{ route('posts.create') }}" class="btn btn-success">Create post</a>
+{{--            @if(auth()->check())--}}
+{{--                <a href="" class="btn btn-outline-success">{{ auth()->user()->name }}</a>--}}
+{{--                <a href="{{ route('logout') }}" class="btn btn-success">Logout</a>--}}
+{{--                <a href="{{ route('posts.create') }}" class="btn btn-success">Create post</a>--}}
+{{--            @else--}}
+{{--                <a href="{{ route('register.create') }}" class="btn btn-success">Registration</a>--}}
+{{--                <a href="{{ route('login.create') }}" class="btn btn-success">Login</a>--}}
+{{--            @endif--}}
+
+            @auth
+                <a href="" class="btn btn-outline-success">{{ auth()->user()->name }}</a>
+                <a href="{{ route('logout') }}" class="btn btn-success">Logout</a>
+                <a href="{{ route('posts.create') }}" class="btn btn-success">Create post</a>
+            @endauth
+            @guest
+                <a href="{{ route('register.create') }}" class="btn btn-success">Registration</a>
+                <a href="{{ route('login.create') }}" class="btn btn-success">Login</a>
+            @endguest
+
+
+
+            @php
+                dump(Auth::check())
+            @endphp
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHeader"
                     aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
