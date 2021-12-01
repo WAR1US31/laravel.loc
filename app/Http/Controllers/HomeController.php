@@ -16,24 +16,14 @@ class HomeController extends Controller
 {
     public function index(Request $request)
     {
-//        Cookie::queue('test', 'Test cookie', 5);
-//        Cookie::queue(Cookie::forget('test'));
-//        dump(Cookie::get('test'));
-//        dump($request->cookie('test'));
-//        Cache::put('key', 'Value', 60);
-//        dump(Cache::pull('key'));
-//        dump(Cache::get('key'));
-
-//        Cache::put('key', 'Value', 300);
-//        Cache::flush();
-        if(Cache::has('posts')){
-            $posts = Cache::get('posts');
-        } else {
-            $posts = Post::query()->orderBy('id', 'desc')->get();
-            Cache::put('posts', $posts);
-        }
+//        if(Cache::has('posts')){
+//            $posts = Cache::get('posts');
+//        } else {
+//            $posts = Post::query()->orderBy('id', 'desc')->get();
+//            Cache::put('posts', $posts);
+//        }
+        $posts = Post::query()->orderBy('created_at', 'desc')->paginate(3);
         $title = 'Home Page';
-
 
         return view('home', compact('title', 'posts'));
     }

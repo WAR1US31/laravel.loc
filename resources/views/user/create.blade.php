@@ -15,7 +15,7 @@
     <section class="py-5 container">
         <div class="album py-3 bg-light">
             <div class="container">
-                <form class="row gy-2 gx-3 align-items-center" action="{{ route('register.store') }}" method="post">
+                <form class="row gy-2 gx-3 align-items-center" action="{{ route('register.store') }}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="row mb-3">
                         <label for="name">Имя</label>
@@ -48,6 +48,10 @@
                         @error('password_confirmation')
                         <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
+                    </div>
+                    <div class="mb-3">
+                        <label for="avatar" class="form-label">Загрузите аватарку</label>
+                        <input class="form-control" type="file" id="avatar" name="avatar">
                     </div>
                     <div class="row mb-3">
                         <button type="submit" class="btn btn-primary">Зарегистрировать</button>

@@ -11,3 +11,7 @@
         font-size: 3.5rem;
     }
 }
+.avatar{
+    width: 75px;
+    border-radius: 50px;
+}

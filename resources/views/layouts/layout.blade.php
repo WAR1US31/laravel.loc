@@ -7,11 +7,13 @@
     <meta name="generator" content="Hugo 0.88.1">
     <title>@section('title')My Site @show</title>
 
-    <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/album/">
+{{--    <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/album/">--}}
 
+{{--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">--}}
 
     <!-- Bootstrap core CSS -->
     <link href="{{asset('css/bootstrap.css')}}" rel="stylesheet">
+{{--    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">--}}
 
     <!-- Favicons -->
     <link rel="apple-touch-icon" href="https://getbootstrap.com/docs/5.1/assets/img/favicons/apple-touch-icon.png"
@@ -73,7 +75,14 @@
 {{--            @endif--}}
 
             @auth
-                <a href="" class="btn btn-outline-success">{{ auth()->user()->name }}</a>
+                <div>
+                    @if(auth()->user()->avatar)
+                        <img class="avatar" src="{{ asset('storage/' . auth()->user()->avatar) }}" alt="">
+                    @endif
+                    <a href="" class="btn btn-outline-success">
+                        {{ auth()->user()->name }}
+                    </a>
+                </div>
                 <a href="{{ route('logout') }}" class="btn btn-success">Logout</a>
                 <a href="{{ route('posts.create') }}" class="btn btn-success">Create post</a>
             @endauth
@@ -107,9 +116,10 @@
 
 @include('layouts.footer')
 
-
+{{--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>--}}
 <script src="{{ asset('js/bootstrap.bundle.js') }}"></script>
-
+{{--<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>--}}
 
 </body>
 </html>

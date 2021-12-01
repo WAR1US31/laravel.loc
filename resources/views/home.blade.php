@@ -14,7 +14,6 @@
     </section>
     <div class="album py-5 bg-light">
         <div class="container">
-
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
                 @foreach($posts as $post)
                     <div class="col">
@@ -37,7 +36,8 @@
                                     <small class="text-muted">
                                         {{--{{ $post->created_at }}--}}
                                         {{--{{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $post->created_at)->format('d.m.Y') }}--}}
-                                        {{ $post->getPostDate() }}
+{{--                                        {{ $post->getPostDate() }}--}}
+                                        {{ $post->created_at->format('d.m.Y') }}
                                     </small>
                                 </div>
                             </div>
@@ -45,6 +45,10 @@
                     </div>
                 @endforeach
             </div>
+            <div class="row row-cols-1 mt-3">
+                {{ $posts->onEachSide(3)->links() }}
+            </div>
         </div>
     </div>
+
 @endsection
